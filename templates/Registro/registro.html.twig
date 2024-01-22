@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bienvenido!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    {% block stylesheets %}
+        <style>
+            body {
+                background-image: url("{{ asset('img/fondo.webp') }}");
+                background-repeat: no-repeat;
+                background-size: cover; 
+                overflow: hidden;
+            }
+
+            input[type="text"], input[type="password"] {
+                width: 100%;
+            }
+            .terms {
+                text-align: center;
+            }
+            label.required {
+                margin-right: 2%;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card" style="width: 24rem;">
+                <div class="card-body">
+                    <h1 class="text-center">Registro</h1>
+                    {{ form_start(registrationForm) }}
+                        <div class="form-group">
+                            {{ form_label(registrationForm.email, 'Email') }}
+                            {{ form_widget(registrationForm.email) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.plainPassword, 'Password') }}
+                            {{ form_widget(registrationForm.plainPassword) }}
+                        </div>
+                        <div class="form-group terms">
+                            {{ form_row(registrationForm.agreeTerms, {
+                                label: 'Aceptar terminos y condiciones'
+                            }) }}
+                            <p>¿Ya tienes cuenta? <a href="{{ path('app_login') }}">Inicia sesión</a></p>
+                        </div>
+                        <div class="text-center">
+                            
+                            <button type="submit" class="btn btn-success">Registrarse</button>
+                        </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>
